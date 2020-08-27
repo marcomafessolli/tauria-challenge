@@ -12,9 +12,12 @@ import SelectCrust from './components/select-crust'
 import SelectToppings from './components/select-toppings'
 import CheckYourPizza from './components/check-your-pizza'
 
+import Navigation from './components/navigation'
+
 const App: React.FunctionComponent = () => {
   return (
     <Router>
+      <Navigation />
       <Switch>
         <Route path='/choose-your-size'>
           <SelectSize />
