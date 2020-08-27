@@ -7,6 +7,8 @@ import {
   Switch,
 } from 'react-router-dom'
 
+import ROUTES from './routes'
+
 import SelectSize from './components/select-size'
 import SelectCrust from './components/select-crust'
 import SelectToppings from './components/select-toppings'
@@ -19,20 +21,20 @@ const App: React.FunctionComponent = () => {
     <Router>
       <Navigation />
       <Switch>
-        <Route path='/choose-your-size'>
+        <Route path={ROUTES.SELECT_SIZE}>
           <SelectSize />
         </Route>
-        <Route path='/choose-your-crust'>
+        <Route path={ROUTES.SELECT_CRUST}>
           <SelectCrust />
         </Route>
-        <Route path='/choose-your-toppings'>
+        <Route path={ROUTES.SELECT_TOPPINGS}>
           <SelectToppings />
         </Route>
-        <Route path='/check-your-custom-pizza'>
+        <Route path={ROUTES.CHECK_YOUR_PIZZA}>
           <CheckYourPizza />
         </Route>
         <Route exact path='/'>
-          <Redirect to='choose-your-size' />
+          <Redirect to={ROUTES.SELECT_SIZE} />
         </Route>
       </Switch>
     </Router>
