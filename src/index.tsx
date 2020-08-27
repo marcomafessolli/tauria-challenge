@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import App from './pages/App'
+import SelectSize from './components/select-size'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SelectSize />
   </React.StrictMode>,
   document.getElementById('root')
 )
