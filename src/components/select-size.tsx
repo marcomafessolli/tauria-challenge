@@ -4,42 +4,37 @@ import { Link } from 'react-router-dom'
 import ROUTES from '../routes'
 
 import { usePizzaBuilder } from '../context/pizza-context'
-
-const PIZZA_SIZES = [
-  'Small', // $8
-  'Medium', // $10
-  'Large', // $12
-]
+import { PizzaSize, useApiData } from '../context/api-data-context'
 
 const SelectSize: React.FunctionComponent = () => {
   const { setSize, size } = usePizzaBuilder()
+  const { pizzaSizes } = useApiData()
 
-  const selectPizzaSize = (selectedPizzaSize: string) => {
+  const selectPizzaSize = (selectedPizzaSize: PizzaSize) => {
     setSize(selectedPizzaSize)
   }
 
   return (
     <>
       <h2>Choose your Size</h2>
+      <div>Selected Size: {size.label}</div>
 
-      {PIZZA_SIZES.map((pizzaSize, index) => {
+      {pizzaSizes.map((size, index) => {
         return (
           <button
             key={index}
             onClick={() => {
-              selectPizzaSize(pizzaSize)
+              selectPizzaSize(size)
             }}
           >
-            {pizzaSize}
+            {size.label}
           </button>
         )
       })}
 
-      <div>Selected Size: {size}</div>
-
       <Link
         to={ROUTES.SELECT_CRUST}
-        style={!size ? { pointerEvents: 'none' } : {}}
+        style={!size.label ? { pointerEvents: 'none' } : {}}
       >
         Choose your Crust
       </Link>

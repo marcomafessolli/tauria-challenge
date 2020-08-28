@@ -12,12 +12,13 @@ const CheckYourPizza: React.FunctionComponent = () => {
     <>
       <h2>Check your Pizza</h2>
 
-      <div>Selected Size: {size}</div>
-      <div>Selected Crust: {crust}</div>
+      <div>Selected Size: {size.label}</div>
+      <div>Selected Crust: {crust.label}</div>
       <div>Selected Toppings:</div>
+
       <ul>
         {toppings.map((topping, index) => {
-          return <li key={index}>{topping}</li>
+          return <li key={index}>{topping.label}</li>
         })}
       </ul>
 

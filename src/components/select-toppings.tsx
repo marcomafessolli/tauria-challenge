@@ -4,24 +4,13 @@ import { Link } from 'react-router-dom'
 import ROUTES from '../routes'
 
 import { usePizzaBuilder } from '../context/pizza-context'
-
-const TOPPING_OPTIONS = [
-  'Pepperoni',
-  'Mushrooms',
-  'Onions',
-  'Sausage',
-  'Bacon',
-  'Extra cheese',
-  'Black Olives',
-  'Green Peppers',
-  'Pineapple',
-  'Spinach',
-]
+import { PizzaTopping, useApiData } from '../context/api-data-context'
 
 const SelectToppings: React.FunctionComponent = () => {
-  const { toppings, setToppings, canCheckout } = usePizzaBuilder()
+  const { toppings, setToppings } = usePizzaBuilder()
+  const { pizzaToppings, pizzaToppingLimits } = useApiData()
 
-  const selectToppingOption = (selectedToppingOption: string) => {
+  const selectToppingOption = (selectedToppingOption: PizzaTopping) => {
     setToppings([...toppings, selectedToppingOption])
   }
 
@@ -29,18 +18,20 @@ const SelectToppings: React.FunctionComponent = () => {
     <>
       <h2>Choose your Toppings</h2>
 
-      {TOPPING_OPTIONS.map((toppingOption, index) => {
-        const alreadySelected = toppings.includes(toppingOption)
+      {pizzaToppings.map((topping, index) => {
+        const alreadySelected = toppings.find(
+          (selectedTopping) => selectedTopping.label === topping.label
+        )
 
         return (
           <button
-            disabled={alreadySelected}
             key={index}
+            disabled={alreadySelected ? true : false}
             onClick={() => {
-              selectToppingOption(toppingOption)
+              selectToppingOption(topping)
             }}
           >
-            {toppingOption}
+            {topping.label}
           </button>
         )
       })}
@@ -48,13 +39,13 @@ const SelectToppings: React.FunctionComponent = () => {
       <div>Selected Toppings:</div>
       <ul>
         {toppings.map((topping, index) => {
-          return <li key={index}>{topping}</li>
+          return <li key={index}>{topping.label}</li>
         })}
       </ul>
 
       <Link
         to={ROUTES.CHECK_YOUR_PIZZA}
-        style={!canCheckout ? { pointerEvents: 'none' } : {}}
+        style={toppings.length === 0 ? { pointerEvents: 'none' } : {}}
       >
         Check your Custom Pizza
       </Link>

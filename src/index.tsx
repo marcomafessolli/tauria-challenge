@@ -15,31 +15,35 @@ import SelectToppings from './components/select-toppings'
 import CheckYourPizza from './components/check-your-pizza'
 
 import Navigation from './components/navigation'
+
 import { PizzaConsumer } from './context/pizza-context'
+import { ApiDataConsumer } from './context/api-data-context'
 
 const App: React.FunctionComponent = () => {
   return (
     <Router>
-      <PizzaConsumer>
-        <Navigation />
-        <Switch>
-          <Route path={ROUTES.SELECT_SIZE}>
-            <SelectSize />
-          </Route>
-          <Route path={ROUTES.SELECT_CRUST}>
-            <SelectCrust />
-          </Route>
-          <Route path={ROUTES.SELECT_TOPPINGS}>
-            <SelectToppings />
-          </Route>
-          <Route path={ROUTES.CHECK_YOUR_PIZZA}>
-            <CheckYourPizza />
-          </Route>
-          <Route exact path='/'>
-            <Redirect to={ROUTES.SELECT_SIZE} />
-          </Route>
-        </Switch>
-      </PizzaConsumer>
+      <ApiDataConsumer>
+        <PizzaConsumer>
+          <Navigation />
+          <Switch>
+            <Route path={ROUTES.SELECT_SIZE}>
+              <SelectSize />
+            </Route>
+            <Route path={ROUTES.SELECT_CRUST}>
+              <SelectCrust />
+            </Route>
+            <Route path={ROUTES.SELECT_TOPPINGS}>
+              <SelectToppings />
+            </Route>
+            <Route path={ROUTES.CHECK_YOUR_PIZZA}>
+              <CheckYourPizza />
+            </Route>
+            <Route exact path='/'>
+              <Redirect to={ROUTES.SELECT_SIZE} />
+            </Route>
+          </Switch>
+        </PizzaConsumer>
+      </ApiDataConsumer>
     </Router>
   )
 }

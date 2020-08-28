@@ -1,44 +1,66 @@
 import React, { useContext, useEffect, useState } from 'react'
 
-interface PizzaContext {
+import {
+  PizzaCrust,
+  PizzaSize,
+  PizzaTopping,
+  useApiData,
+} from './api-data-context'
+
+type PizzaContext = {
   setSize: Function
   setCrust: Function
   setToppings: Function
-  size: string
-  crust: string
-  toppings: Array<string>
+  size: PizzaSize
+  crust: PizzaCrust
+  toppings: Array<PizzaTopping>
   price: number
-  canCheckout: boolean
 }
 
-const defaultContext: PizzaContext = {
-  setSize: () => {},
-  setCrust: () => {},
-  setToppings: () => {},
-  size: '',
-  crust: '',
-  toppings: [],
-  price: 0,
-  canCheckout: false,
-}
-
-const PizzaContext = React.createContext<PizzaContext>(defaultContext)
+const PizzaContext = React.createContext<PizzaContext>({} as PizzaContext)
 
 export const usePizzaBuilder = () => {
-  return useContext(PizzaContext)
+  return useContext(PizzaContext) as PizzaContext
 }
 
 export const PizzaConsumer: React.FunctionComponent = ({ children }) => {
-  const [size, setSize] = useState('')
-  const [crust, setCrust] = useState('')
+  const [size, setSize] = useState({} as PizzaSize)
+  const [crust, setCrust] = useState({} as PizzaCrust)
   const [toppings, setToppings] = useState([])
   const [price, setPrice] = useState(0)
-  const [canCheckout, setCanCheckout] = useState(false)
+
+  const { pizzaToppingLimits } = useApiData()
+
+  const calculatePizzaPrice = (): number => {
+    let totalPrice = 0
+
+    if (size.price) {
+      totalPrice += size.price
+    }
+
+    if (crust.price) {
+      totalPrice += crust.price
+    }
+
+    if (toppings.length <= 0) {
+      return totalPrice
+    }
+
+    const totalToppings = toppings.length
+    const exceededToppings =
+      totalToppings - pizzaToppingLimits.limitWithoutAdditional
+
+    debugger
+    if (exceededToppings > 0) {
+      totalPrice += exceededToppings * pizzaToppingLimits.additionalToppingCost
+    }
+
+    return totalPrice || 0
+  }
 
   useEffect(() => {
-    setPrice((price) => {
-      return price + 1
-    })
+    const totalPizzaPrice = calculatePizzaPrice()
+    setPrice(totalPizzaPrice)
   }, [size, crust, toppings])
 
   return (
@@ -51,7 +73,6 @@ export const PizzaConsumer: React.FunctionComponent = ({ children }) => {
         crust,
         toppings,
         price,
-        canCheckout,
       }}
     >
       {children}

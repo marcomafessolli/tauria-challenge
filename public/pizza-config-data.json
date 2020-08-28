@@ -1,0 +1,66 @@
+{
+  "pizzaSizes": [
+    {
+      "label": "Small",
+      "price": 8,
+      "toppingLimit": 5
+    },
+    {
+      "label": "Medium",
+      "price": 10,
+      "toppingLimit": 7
+    },
+    {
+      "label": "Large",
+      "price": 12,
+      "toppingLimit": 9
+    }
+  ],
+  "pizzaCrusts": [
+    {
+      "label": "Thin",
+      "price": 2
+    },
+    {
+      "label": "Thick",
+      "price": "4"
+    }
+  ],
+  "pizzaToppingLimits": {
+    "limitWithoutAdditional": 3,
+    "additionalToppingCost": 0.5,
+    "allowRepeated": false
+  },
+  "pizzaToppings": [
+    {
+      "label": "Pepperoni"
+    },
+    {
+      "label": "Mushrooms"
+    },
+    {
+      "label": "Onions"
+    },
+    {
+      "label": "Sausage"
+    },
+    {
+      "label": "Bacon"
+    },
+    {
+      "label": "Extra Cheese"
+    },
+    {
+      "label": "Black Olives"
+    },
+    {
+      "label": "Green Peppers"
+    },
+    {
+      "label": "Pineapple"
+    },
+    {
+      "label": "Spinach"
+    }
+  ]
+}

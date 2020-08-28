@@ -6,7 +6,7 @@ import ROUTES from '../routes'
 import { usePizzaBuilder } from '../context/pizza-context'
 
 const Navigation: React.FunctionComponent = () => {
-  const { size, crust, canCheckout } = usePizzaBuilder()
+  const { size, crust, toppings } = usePizzaBuilder()
 
   return (
     <nav>
@@ -25,7 +25,7 @@ const Navigation: React.FunctionComponent = () => {
       </NavLink>
       <NavLink
         to={ROUTES.CHECK_YOUR_PIZZA}
-        style={!canCheckout ? { pointerEvents: 'none' } : {}}
+        style={toppings.length <= 0 ? { pointerEvents: 'none' } : {}}
       >
         Check your pizza
       </NavLink>
