@@ -19,7 +19,7 @@ const TOPPING_OPTIONS = [
 ]
 
 const SelectToppings: React.FunctionComponent = () => {
-  const { toppings, setToppings } = usePizzaBuilder()
+  const { toppings, setToppings, canCheckout } = usePizzaBuilder()
 
   const selectToppingOption = (selectedToppingOption: string) => {
     setToppings([...toppings, selectedToppingOption])
@@ -52,7 +52,12 @@ const SelectToppings: React.FunctionComponent = () => {
         })}
       </ul>
 
-      <Link to={ROUTES.CHECK_YOUR_PIZZA}>Check your Custom Pizza</Link>
+      <Link
+        to={ROUTES.CHECK_YOUR_PIZZA}
+        style={!canCheckout ? { pointerEvents: 'none' } : {}}
+      >
+        Check your Custom Pizza
+      </Link>
     </>
   )
 }

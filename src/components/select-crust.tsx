@@ -36,7 +36,12 @@ const SelectCrust: React.FunctionComponent = () => {
 
       <div>Selected Crust: {crust}</div>
 
-      <Link to={ROUTES.SELECT_TOPPINGS}>Choose your Toppings</Link>
+      <Link
+        to={ROUTES.SELECT_TOPPINGS}
+        style={!crust ? { pointerEvents: 'none' } : {}}
+      >
+        Choose your Toppings
+      </Link>
     </>
   )
 }

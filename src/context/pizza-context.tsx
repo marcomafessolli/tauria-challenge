@@ -8,6 +8,7 @@ interface PizzaContext {
   crust: string
   toppings: Array<string>
   price: number
+  canCheckout: boolean
 }
 
 const defaultContext: PizzaContext = {
@@ -18,6 +19,7 @@ const defaultContext: PizzaContext = {
   crust: '',
   toppings: [],
   price: 0,
+  canCheckout: false,
 }
 
 const PizzaContext = React.createContext<PizzaContext>(defaultContext)
@@ -31,6 +33,7 @@ export const PizzaConsumer: React.FunctionComponent = ({ children }) => {
   const [crust, setCrust] = useState('')
   const [toppings, setToppings] = useState([])
   const [price, setPrice] = useState(0)
+  const [canCheckout, setCanCheckout] = useState(false)
 
   useEffect(() => {
     setPrice((price) => {
@@ -48,6 +51,7 @@ export const PizzaConsumer: React.FunctionComponent = ({ children }) => {
         crust,
         toppings,
         price,
+        canCheckout,
       }}
     >
       {children}

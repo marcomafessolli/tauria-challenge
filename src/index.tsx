@@ -20,8 +20,8 @@ import { PizzaConsumer } from './context/pizza-context'
 const App: React.FunctionComponent = () => {
   return (
     <Router>
-      <Navigation />
       <PizzaConsumer>
+        <Navigation />
         <Switch>
           <Route path={ROUTES.SELECT_SIZE}>
             <SelectSize />

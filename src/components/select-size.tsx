@@ -37,7 +37,12 @@ const SelectSize: React.FunctionComponent = () => {
 
       <div>Selected Size: {size}</div>
 
-      <Link to={ROUTES.SELECT_CRUST}>Choose your Crust</Link>
+      <Link
+        to={ROUTES.SELECT_CRUST}
+        style={!size ? { pointerEvents: 'none' } : {}}
+      >
+        Choose your Crust
+      </Link>
     </>
   )
 }
