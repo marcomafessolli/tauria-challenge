@@ -31,35 +31,36 @@ export const PizzaConsumer: React.FunctionComponent = ({ children }) => {
 
   const { pizzaToppingLimits } = useApiData()
 
-  const calculatePizzaPrice = (): number => {
-    let totalPrice = 0
-
-    if (size.price) {
-      totalPrice += size.price
-    }
-
-    if (crust.price) {
-      totalPrice += crust.price
-    }
-
-    if (toppings.length <= 0) {
-      return totalPrice
-    }
-
-    const totalToppings = toppings.length
-    const exceededToppings =
-      totalToppings - pizzaToppingLimits.limitWithoutAdditional
-
-    debugger
-    if (exceededToppings > 0) {
-      totalPrice += exceededToppings * pizzaToppingLimits.additionalToppingCost
-    }
-
-    return totalPrice || 0
-  }
-
   useEffect(() => {
+    const calculatePizzaPrice = (): number => {
+      let totalPrice = 0
+
+      if (size.price) {
+        totalPrice += size.price
+      }
+
+      if (crust.price) {
+        totalPrice += crust.price
+      }
+
+      if (toppings.length <= 0) {
+        return totalPrice
+      }
+
+      const totalToppings = toppings.length
+      const exceededToppings =
+        totalToppings - pizzaToppingLimits.limitWithoutAdditional
+
+      if (exceededToppings > 0) {
+        totalPrice +=
+          exceededToppings * pizzaToppingLimits.additionalToppingCost
+      }
+
+      return totalPrice || 0
+    }
+
     const totalPizzaPrice = calculatePizzaPrice()
+
     setPrice(totalPizzaPrice)
   }, [size, crust, toppings])
 

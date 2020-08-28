@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import ROUTES from '../routes'
 
@@ -7,11 +7,15 @@ import { usePizzaBuilder } from '../context/pizza-context'
 import { PizzaCrust, useApiData } from '../context/api-data-context'
 
 const SelectCrust: React.FunctionComponent = () => {
-  const { crust, setCrust } = usePizzaBuilder()
+  const { size, crust, setCrust } = usePizzaBuilder()
   const { pizzaCrusts } = useApiData()
 
   const selectCrustOption = (selectedCrustOption: PizzaCrust) => {
     setCrust(selectedCrustOption)
+  }
+
+  if (!size.label) {
+    return <Redirect to={ROUTES.SELECT_SIZE} />
   }
 
   return (

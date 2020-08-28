@@ -13,13 +13,13 @@ const Navigation: React.FunctionComponent = () => {
       <NavLink to={ROUTES.SELECT_SIZE}>Choose your Size</NavLink>
       <NavLink
         to={ROUTES.SELECT_CRUST}
-        style={!size ? { pointerEvents: 'none' } : {}}
+        style={!size.label ? { pointerEvents: 'none' } : {}}
       >
         Choose your Crust
       </NavLink>
       <NavLink
         to={ROUTES.SELECT_TOPPINGS}
-        style={!crust ? { pointerEvents: 'none' } : {}}
+        style={!crust.label ? { pointerEvents: 'none' } : {}}
       >
         Choose yor Toppings
       </NavLink>

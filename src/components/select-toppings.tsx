@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import ROUTES from '../routes'
 
@@ -7,26 +7,36 @@ import { usePizzaBuilder } from '../context/pizza-context'
 import { PizzaTopping, useApiData } from '../context/api-data-context'
 
 const SelectToppings: React.FunctionComponent = () => {
-  const { toppings, setToppings } = usePizzaBuilder()
-  const { pizzaToppings, pizzaToppingLimits } = useApiData()
+  const { size, crust, toppings, setToppings } = usePizzaBuilder()
+  const { pizzaToppings } = useApiData()
 
   const selectToppingOption = (selectedToppingOption: PizzaTopping) => {
     setToppings([...toppings, selectedToppingOption])
   }
 
+  if (!crust.label) {
+    return <Redirect to={ROUTES.SELECT_CRUST} />
+  }
+
   return (
     <>
-      <h2>Choose your Toppings</h2>
+      <h2>Choose your Toppings: (Limit: {size.toppingLimit})</h2>
 
       {pizzaToppings.map((topping, index) => {
         const alreadySelected = toppings.find(
           (selectedTopping) => selectedTopping.label === topping.label
         )
 
+        let shouldDisableButton = false
+
+        if (alreadySelected || size.toppingLimit === toppings.length) {
+          shouldDisableButton = true
+        }
+
         return (
           <button
             key={index}
-            disabled={alreadySelected ? true : false}
+            disabled={shouldDisableButton}
             onClick={() => {
               selectToppingOption(topping)
             }}
