@@ -6,7 +6,8 @@ import ROUTES from '../routes'
 import { usePizzaBuilder } from '../context/pizza-context'
 
 const CheckYourPizza: React.FunctionComponent = () => {
-  const { size, crust, toppings, price } = usePizzaBuilder()
+  const { size, crust, toppings, price, resetPizza } = usePizzaBuilder()
+
   const priceFormat = Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -32,7 +33,14 @@ const CheckYourPizza: React.FunctionComponent = () => {
 
       <div>Total price: {priceFormat}</div>
 
-      <Link to={ROUTES.SELECT_SIZE}>Order Again</Link>
+      <Link
+        to={ROUTES.SELECT_SIZE}
+        onClick={() => {
+          resetPizza()
+        }}
+      >
+        Order Again
+      </Link>
     </>
   )
 }

@@ -11,6 +11,7 @@ type PizzaContext = {
   setSize: Function
   setCrust: Function
   setToppings: Function
+  resetPizza: Function
   size: PizzaSize
   crust: PizzaCrust
   toppings: Array<PizzaTopping>
@@ -30,6 +31,13 @@ export const PizzaConsumer: React.FunctionComponent = ({ children }) => {
   const [price, setPrice] = useState(0)
 
   const { pizzaToppingLimits } = useApiData()
+
+  const resetPizza = () => {
+    setSize({} as PizzaSize)
+    setCrust({} as PizzaCrust)
+    setToppings([])
+    setPrice(0)
+  }
 
   useEffect(() => {
     const calculatePizzaPrice = (): number => {
@@ -72,6 +80,7 @@ export const PizzaConsumer: React.FunctionComponent = ({ children }) => {
         setSize,
         setCrust,
         setToppings,
+        resetPizza,
         size,
         crust,
         toppings,
