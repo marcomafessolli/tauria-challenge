@@ -15,28 +15,31 @@ import SelectToppings from './components/select-toppings'
 import CheckYourPizza from './components/check-your-pizza'
 
 import Navigation from './components/navigation'
+import { PizzaConsumer } from './context/pizza-context'
 
 const App: React.FunctionComponent = () => {
   return (
     <Router>
       <Navigation />
-      <Switch>
-        <Route path={ROUTES.SELECT_SIZE}>
-          <SelectSize />
-        </Route>
-        <Route path={ROUTES.SELECT_CRUST}>
-          <SelectCrust />
-        </Route>
-        <Route path={ROUTES.SELECT_TOPPINGS}>
-          <SelectToppings />
-        </Route>
-        <Route path={ROUTES.CHECK_YOUR_PIZZA}>
-          <CheckYourPizza />
-        </Route>
-        <Route exact path='/'>
-          <Redirect to={ROUTES.SELECT_SIZE} />
-        </Route>
-      </Switch>
+      <PizzaConsumer>
+        <Switch>
+          <Route path={ROUTES.SELECT_SIZE}>
+            <SelectSize />
+          </Route>
+          <Route path={ROUTES.SELECT_CRUST}>
+            <SelectCrust />
+          </Route>
+          <Route path={ROUTES.SELECT_TOPPINGS}>
+            <SelectToppings />
+          </Route>
+          <Route path={ROUTES.CHECK_YOUR_PIZZA}>
+            <CheckYourPizza />
+          </Route>
+          <Route exact path='/'>
+            <Redirect to={ROUTES.SELECT_SIZE} />
+          </Route>
+        </Switch>
+      </PizzaConsumer>
     </Router>
   )
 }
