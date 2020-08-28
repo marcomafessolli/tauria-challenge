@@ -52,7 +52,8 @@ export const PizzaConsumer: React.FunctionComponent = ({ children }) => {
         totalToppings - pizzaToppingLimits.limitWithoutAdditional
 
       if (exceededToppings > 0) {
-        totalPrice +=
+        totalPrice =
+          totalPrice +
           exceededToppings * pizzaToppingLimits.additionalToppingCost
       }
 
@@ -60,6 +61,7 @@ export const PizzaConsumer: React.FunctionComponent = ({ children }) => {
     }
 
     const totalPizzaPrice = calculatePizzaPrice()
+    console.log(totalPizzaPrice)
 
     setPrice(totalPizzaPrice)
   }, [size, crust, toppings])

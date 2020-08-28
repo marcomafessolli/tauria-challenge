@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import ROUTES from '../routes'
 
@@ -7,6 +7,14 @@ import { usePizzaBuilder } from '../context/pizza-context'
 
 const CheckYourPizza: React.FunctionComponent = () => {
   const { size, crust, toppings, price } = usePizzaBuilder()
+  const priceFormat = Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(price)
+
+  if (toppings.length === 0) {
+    return <Redirect to={ROUTES.SELECT_TOPPINGS} />
+  }
 
   return (
     <>
@@ -22,7 +30,7 @@ const CheckYourPizza: React.FunctionComponent = () => {
         })}
       </ul>
 
-      <div>Total price: {price}</div>
+      <div>Total price: {priceFormat}</div>
 
       <Link to={ROUTES.SELECT_SIZE}>Order Again</Link>
     </>

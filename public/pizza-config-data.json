@@ -23,7 +23,7 @@
     },
     {
       "label": "Thick",
-      "price": "4"
+      "price": 4
     }
   ],
   "pizzaToppingLimits": {
