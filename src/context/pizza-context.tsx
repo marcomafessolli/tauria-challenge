@@ -69,8 +69,6 @@ export const PizzaConsumer: React.FunctionComponent = ({ children }) => {
     }
 
     const totalPizzaPrice = calculatePizzaPrice()
-    console.log(totalPizzaPrice)
-
     setPrice(totalPizzaPrice)
   }, [size, crust, toppings])
 
