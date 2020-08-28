@@ -30,8 +30,11 @@ const SelectToppings: React.FunctionComponent = () => {
       <h2>Choose your Toppings</h2>
 
       {TOPPING_OPTIONS.map((toppingOption, index) => {
+        const alreadySelected = toppings.includes(toppingOption)
+
         return (
           <button
+            disabled={alreadySelected}
             key={index}
             onClick={() => {
               selectToppingOption(toppingOption)
