@@ -17,7 +17,6 @@ const SelectSize: React.FunctionComponent = () => {
   return (
     <>
       <h2>Choose your Size</h2>
-      <div>Selected Size: {size.label}</div>
 
       {pizzaSizes.map((size, index) => {
         return (
@@ -31,6 +30,8 @@ const SelectSize: React.FunctionComponent = () => {
           </button>
         )
       })}
+
+      <div>Selected Size: {size.label}</div>
 
       <Link
         to={ROUTES.SELECT_CRUST}
